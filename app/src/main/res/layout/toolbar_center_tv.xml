@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <!--
+    阴影控制
+    app:elevation="@dimen/space_0"
+    -->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="@dimen/space_0"
+        app:colorControlNormal="@color/black">
+
+        <!--
+            app:layout_scrollFlags="scroll|snap|enterAlways"
+            scroll单独使用，会出现toolbar停留在动画中间的效果，不是很好
+            配合snap使用可以解决这个问题-->
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center"
+            android:background="@color/toolbarBackColor"
+            app:contentInsetStart="@dimen/space_0"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <ImageView
+                android:id="@+id/toolbar_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="@dimen/space_16"
+                android:paddingLeft="@dimen/space_16"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:srcCompat="@drawable/main_toolbar_ic_arrow_back"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/text_size_20"/>
+
+            <TextView
+                android:id="@+id/right_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/text_size_16"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:paddingRight="@dimen/space_10"
+                android:paddingLeft="@dimen/space_10" />
+        </android.support.v7.widget.Toolbar>
+
+
+    </android.support.design.widget.AppBarLayout>
+</merge>
