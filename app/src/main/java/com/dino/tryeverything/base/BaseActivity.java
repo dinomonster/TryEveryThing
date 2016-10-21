@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.dino.tryeverything.R;
 import com.dino.tryeverything.interf.BaseViewInterface;
+import com.dino.tryeverything.utils.DialogHelper;
 import com.dino.tryeverything.utils.StringUtils;
 
 import butterknife.ButterKnife;
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseViewInterface {
     protected Toolbar toolbar;
+    protected DialogHelper dialogHelper;
 
     protected abstract int getLayoutId();
 
@@ -38,6 +40,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         initView();
         initData();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(null!=dialogHelper){
+            dialogHelper.dismissProgressDialog();
+        }
+    }
+
 
     /**
      * 设置 ToorBar, 只显示返回栏

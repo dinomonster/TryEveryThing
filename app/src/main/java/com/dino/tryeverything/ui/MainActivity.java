@@ -11,11 +11,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.dino.tryeverything.R;
 import com.dino.tryeverything.base.BaseActivity;
 import com.dino.tryeverything.ui.loading.LeafLoadingActivity;
+import com.dino.tryeverything.ui.tasks.TasksFragment;
+import com.dino.tryeverything.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,8 +29,8 @@ public class MainActivity extends BaseActivity
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.content_main)
-    RelativeLayout contentMain;
+    @BindView(R.id.contentFrame)
+    FrameLayout contentFrame;
     @BindView(R.id.fab)
     FloatingActionButton fab;
     @BindView(R.id.nav_view)
@@ -107,6 +110,16 @@ public class MainActivity extends BaseActivity
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navView.setNavigationItemSelectedListener(this);
+
+        TasksFragment tasksFragment =
+                (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (tasksFragment == null) {
+            // Create the fragment
+            tasksFragment = TasksFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), tasksFragment, R.id.contentFrame);
+        }
+
     }
 
     @Override

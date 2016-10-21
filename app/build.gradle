@@ -43,4 +43,7 @@ dependencies {
     //加载动画
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
 
+    //google官方工具
+    compile "com.google.guava:guava:$rootProject.guavaVersion"
+
 }
