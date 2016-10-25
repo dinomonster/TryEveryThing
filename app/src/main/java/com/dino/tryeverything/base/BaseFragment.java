@@ -30,13 +30,13 @@ public abstract class BaseFragment extends Fragment implements BaseViewInterface
      * 绑定布局
      * 使用：View.inflate(getContext(),R.layout.fragment_main_1, null)
      */
-    protected abstract View getLayoutId();
+    protected abstract int getLayoutId();
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        return getLayoutId();
+        return View.inflate(getActivity(),getLayoutId(),null);
     }
 
     @Override

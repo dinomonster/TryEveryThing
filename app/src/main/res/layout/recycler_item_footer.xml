@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@color/rcv_foot_bg">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_15"
+        android:paddingBottom="@dimen/space_15">
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="@dimen/space_80"
+            android:layout_height="@dimen/space_0.3"
+            android:background="@color/rcv_foot_line"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/space_20"
+            android:paddingRight="@dimen/space_20"
+            android:textColor="@color/rcv_foot_text"
+            android:text="已经到底啦"/>
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="@dimen/space_80"
+            android:layout_height="@dimen/space_0.3"
+            android:background="@color/rcv_foot_line"/>
+
+    </LinearLayout>
+</RelativeLayout>

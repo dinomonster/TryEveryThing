@@ -152,4 +152,15 @@
     <color name="black">#000000</color> <!-- 黑色 -->
     <color name="transparent">#00000000</color>
     <color name="toolbarBackColor">#f6f6f6</color>
+
+    <color name="graywhite">#FFC6C6C6</color>
+    <color name="rcv_foot_text">#a4a9b0</color>
+    <color name="rcv_foot_line">#d0d0d0</color>
+    <color name="rcv_foot_bg">#ebeeef</color>
+
+    <!-- 下拉刷新时，颜色值 -->
+    <color name="swiperefresh_color1">#ff00ddff</color>
+    <color name="swiperefresh_color2">#ffffbb33</color>
+    <color name="swiperefresh_color3">#ffff4444</color>
+    <color name="swiperefresh_color4">#ffaa66cc</color>
 </resources>

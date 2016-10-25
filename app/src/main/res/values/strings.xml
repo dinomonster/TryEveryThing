@@ -6,4 +6,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="leafloading">leafloading</string>
+
+    <string name="no_tasks_all">You have no TO-DOs!</string>
+    <string name="no_tasks_add">Add a TO-DO item +</string>
 </resources>

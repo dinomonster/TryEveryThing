@@ -16,8 +16,12 @@ import android.widget.RelativeLayout;
 
 import com.dino.tryeverything.R;
 import com.dino.tryeverything.base.BaseActivity;
+import com.dino.tryeverything.data.source.Repository;
+import com.dino.tryeverything.data.source.local.LocalDataSource;
+import com.dino.tryeverything.data.source.remote.RemoteDataSource;
+import com.dino.tryeverything.ui.image.ImagesFragment;
+import com.dino.tryeverything.ui.image.ImagesPresenter;
 import com.dino.tryeverything.ui.loading.LeafLoadingActivity;
-import com.dino.tryeverything.ui.tasks.TasksFragment;
 import com.dino.tryeverything.utils.ActivityUtils;
 
 import butterknife.BindView;
@@ -37,6 +41,8 @@ public class MainActivity extends BaseActivity
     NavigationView navView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+
+    private ImagesPresenter imagesPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -111,14 +117,17 @@ public class MainActivity extends BaseActivity
         toggle.syncState();
         navView.setNavigationItemSelectedListener(this);
 
-        TasksFragment tasksFragment =
-                (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-        if (tasksFragment == null) {
+        ImagesFragment imagesFragment =
+                (ImagesFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (imagesFragment == null) {
             // Create the fragment
-            tasksFragment = TasksFragment.newInstance();
+            imagesFragment = ImagesFragment.newInstance();
             ActivityUtils.addFragmentToActivity(
-                    getSupportFragmentManager(), tasksFragment, R.id.contentFrame);
+                    getSupportFragmentManager(), imagesFragment, R.id.contentFrame);
         }
+
+
+        imagesPresenter = new ImagesPresenter(imagesFragment, Repository.getInstance(RemoteDataSource.getInstance(), LocalDataSource.getInstance()));
 
     }
 
@@ -127,12 +136,6 @@ public class MainActivity extends BaseActivity
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick(R.id.fab)
     public void onClick(View view) {
