@@ -1,4 +1,4 @@
-package com.dino.tryeverything.data.source.local;
+package com.dino.tryeverything.data.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

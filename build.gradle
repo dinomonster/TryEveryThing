@@ -26,9 +26,12 @@ task clean(type: Delete) {
 
 
 ext {
-    rxjavaVersion = '1.1.8'
-    rxandroidVersion = '1.2.1'
+    v7Version = "24.2.1"
+    designVersion = "24.2.1"
+    cardViewVersion = "24.2.1"
     guavaVersion = '18.0'
+
+
 }
 
 

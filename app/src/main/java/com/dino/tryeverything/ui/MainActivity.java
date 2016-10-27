@@ -1,6 +1,5 @@
 package com.dino.tryeverything.ui;
 
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -12,20 +11,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import com.dino.tryeverything.R;
 import com.dino.tryeverything.base.BaseActivity;
-import com.dino.tryeverything.data.source.Repository;
-import com.dino.tryeverything.data.source.local.LocalDataSource;
-import com.dino.tryeverything.data.source.remote.RemoteDataSource;
+import com.dino.tryeverything.data.Repository;
+import com.dino.tryeverything.data.local.LocalDataSource;
+import com.dino.tryeverything.data.remote.RemoteDataSource;
 import com.dino.tryeverything.ui.image.ImagesFragment;
 import com.dino.tryeverything.ui.image.ImagesPresenter;
 import com.dino.tryeverything.ui.loading.LeafLoadingActivity;
 import com.dino.tryeverything.utils.ActivityUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity
@@ -86,13 +83,15 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
             nextActivity(LeafLoadingActivity.class);
         } else if (id == R.id.nav_gallery) {
-
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -103,8 +102,7 @@ public class MainActivity extends BaseActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 

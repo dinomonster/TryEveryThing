@@ -1,9 +1,10 @@
-package com.dino.tryeverything.data.source.remote;
+package com.dino.tryeverything.data.remote;
 
 import android.support.annotation.NonNull;
 
-import com.dino.tryeverything.data.source.DataSource;
-import com.dino.tryeverything.data.source.local.Image;
+import com.dino.tryeverything.data.DataSource;
+import com.dino.tryeverything.bean.Image;
+import com.dino.tryeverything.data.remote.network.NetWork;
 
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class RemoteDataSource implements DataSource {
     private static RemoteDataSource INSTANCE;
 
     @Override
-    public Observable<List<Image>> getImages() {
-        return null;
+    public Observable<List<Image>> getImages(int pageno,int pagesize) {
+        return NetWork.getImageApi().search("装逼");
     }
 
     @Override

@@ -2,11 +2,9 @@ package com.dino.tryeverything.ui.image;
 
 import com.dino.tryeverything.base.BasePresenter;
 import com.dino.tryeverything.base.BaseView;
-import com.dino.tryeverything.data.source.local.Image;
+import com.dino.tryeverything.bean.Image;
 
 import java.util.List;
-
-import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 /**
  * Created by Dino on 10/24 0024.
@@ -45,7 +43,8 @@ public interface ImagesContract {
         /**
          * 加载照片
          */
-        void loadImage();
+        void loadImage(int pageno,int pagesize);
+
 
     }
 }

@@ -3,7 +3,7 @@ package com.dino.tryeverything;
 import android.app.Application;
 import android.util.TypedValue;
 
-import com.dino.tryeverything.data.source.local.DaoManager;
+import com.dino.tryeverything.data.local.DaoManager;
 import com.dino.tryeverything.widget.UILImageLoader;
 
 import cn.finalteam.galleryfinal.CoreConfig;

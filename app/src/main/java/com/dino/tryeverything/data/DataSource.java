@@ -1,9 +1,9 @@
-package com.dino.tryeverything.data.source;
+package com.dino.tryeverything.data;
 
 import android.support.annotation.NonNull;
 
 
-import com.dino.tryeverything.data.source.local.Image;
+import com.dino.tryeverything.bean.Image;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import rx.Observable;
 
 public interface DataSource {
 
-    Observable<List<Image>> getImages();
+    Observable<List<Image>> getImages(int pageno,int pagesize);
 
     Observable<Image> getImage(@NonNull String imageId);
 

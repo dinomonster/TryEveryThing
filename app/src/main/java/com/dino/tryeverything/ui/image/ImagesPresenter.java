@@ -1,17 +1,18 @@
 package com.dino.tryeverything.ui.image;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 
-import com.dino.tryeverything.data.source.Repository;
-import com.dino.tryeverything.data.source.local.Image;
+import com.dino.tryeverything.data.Repository;
+import com.dino.tryeverything.bean.Image;
 
 import java.util.List;
 
-import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -48,14 +49,21 @@ public class ImagesPresenter implements ImagesContract.Presenter{
 
     @Override
     public void saveImage(Image image) {
-        repository.saveImage(image);
+        repository.saveImage(image)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Image>() {
+                    @Override
+                    public void call(Image image) {
+                        loadImage(ImagesFragment.PAGENO,ImagesFragment.PAGESIZE);
+                    }
+                });
     }
 
     @Override
-    public void loadImage() {
+    public void loadImage(int pageno,int pagesize) {
         mSubscriptions.clear();
         Subscription subscription = repository
-                .getImages()
+                .getImages(pageno,pagesize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Image>>() {
@@ -66,6 +74,7 @@ public class ImagesPresenter implements ImagesContract.Presenter{
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.e("onError","onError:"+e.getMessage());
 
                     }
 
@@ -81,7 +90,7 @@ public class ImagesPresenter implements ImagesContract.Presenter{
     @Override
     public void subscribe() {
         //加载数据
-        loadImage();
+        loadImage(ImagesFragment.PAGENO,ImagesFragment.PAGESIZE);
     }
 
     @Override

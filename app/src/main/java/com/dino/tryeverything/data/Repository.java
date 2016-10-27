@@ -1,13 +1,10 @@
-package com.dino.tryeverything.data.source;
+package com.dino.tryeverything.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 
-import com.dino.tryeverything.AppConfig;
-import com.dino.tryeverything.data.source.local.DaoManager;
-import com.dino.tryeverything.data.source.local.DaoMaster;
-import com.dino.tryeverything.data.source.local.Image;
+import com.dino.tryeverything.bean.Image;
 
 import java.util.List;
 
@@ -44,8 +41,9 @@ public class Repository implements DataSource {
     }
 
     @Override
-    public Observable<List<Image>> getImages() {
-        return mLocalDataSource.getImages();
+    public Observable<List<Image>> getImages(int pageno,int pagesize) {
+//        return mLocalDataSource.getImages(pageno,pagesize);
+        return mRemoteDataSource.getImages(pageno,pagesize);
     }
 
     @Override

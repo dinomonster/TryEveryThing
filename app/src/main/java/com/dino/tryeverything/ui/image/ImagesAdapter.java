@@ -4,11 +4,10 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dino.tryeverything.R;
 import com.dino.tryeverything.base.BaseRecyclerAdapter;
-import com.dino.tryeverything.data.source.local.Image;
+import com.dino.tryeverything.bean.Image;
 import com.dino.tryeverything.utils.GlideUtils;
 
 import java.io.File;
@@ -27,9 +26,13 @@ public class ImagesAdapter extends BaseRecyclerAdapter<Image> {
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, Image image) {
-        File file = new File(image.getPath());
-        GlideUtils.loadLocal(file,(ImageView) baseViewHolder.getView(R.id.image));
-        baseViewHolder.setText(R.id.title,image.getName());
+        if(image.getImage_url().startsWith("http")){
+            GlideUtils.load(image.getImage_url(),(ImageView) baseViewHolder.getView(R.id.image));
+        }else{
+            File file = new File(image.getImage_url());
+            GlideUtils.loadLocal(file,(ImageView) baseViewHolder.getView(R.id.image));
+        }
+        baseViewHolder.setText(R.id.title,image.getDescription());
     }
 
 

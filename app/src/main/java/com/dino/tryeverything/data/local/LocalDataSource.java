@@ -1,10 +1,11 @@
-package com.dino.tryeverything.data.source.local;
+package com.dino.tryeverything.data.local;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.dino.tryeverything.AppConfig;
-import com.dino.tryeverything.data.source.DataSource;
+import com.dino.tryeverything.bean.Image;
+import com.dino.tryeverything.data.DataSource;
 
 import org.greenrobot.greendao.rx.RxQuery;
 
@@ -20,9 +21,14 @@ public class LocalDataSource implements DataSource{
     @Nullable
     private static LocalDataSource INSTANCE;
 
+
     @Override
-    public Observable<List<Image>> getImages() {
-        RxQuery<Image> rxQuery = DaoManager.getDaoSession(AppConfig.getInstance()).getImageDao().queryBuilder().rx();
+    public Observable<List<Image>> getImages(int pageno, int pagesize) {
+        RxQuery<Image> rxQuery = DaoManager.getDaoSession(AppConfig.getInstance()).getImageDao()
+                .queryBuilder()
+                .limit(pagesize)//限制查询返回结果的数目
+                .offset(pageno*pagesize)//设置查询结果的偏移量
+                .rx();
         return rxQuery.list();
     }
 
@@ -33,7 +39,6 @@ public class LocalDataSource implements DataSource{
 
     @Override
     public Observable<Image> saveImage(Image image) {
-        DaoManager.getDaoSession(AppConfig.getInstance()).getImageDao().insertOrReplace(image);
         return DaoManager.getDaoSession(AppConfig.getInstance()).getImageDao().rx().insertOrReplace(image);
     }
 
