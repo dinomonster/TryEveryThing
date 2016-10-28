@@ -21,6 +21,11 @@ public interface ImagesContract {
         void showImagePicker();
 
         /**
+         * 错误显示
+         */
+        void showNetWorkError();
+
+        /**
          * 显示照片
          */
         void showImages(List<Image> images);

@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -43,6 +44,8 @@ public class ImagesFragment extends BaseFragment implements SwipeRefreshLayout.O
     public static int PAGENO = 0;
     public static final int PAGESIZE = 5;
 
+    private boolean isRefresh = true;
+
     public ImagesFragment() {
     }
 
@@ -57,9 +60,9 @@ public class ImagesFragment extends BaseFragment implements SwipeRefreshLayout.O
 
     @Override
     public void initView() {
-        final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+//        final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
 //        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);//瀑布流
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);//瀑布流
 //        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -104,6 +107,7 @@ public class ImagesFragment extends BaseFragment implements SwipeRefreshLayout.O
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
+                isRefresh = false;
                 mPresenter.loadImage(++PAGENO,PAGESIZE);
             }
         });
@@ -138,13 +142,14 @@ public class ImagesFragment extends BaseFragment implements SwipeRefreshLayout.O
     public void initData() {
         PAGENO = 0;
         swiprefresh.setRefreshing(true);
+        adapter.openLoadMore(PAGESIZE);
         mPresenter.subscribe();
     }
 
     @Override
     public void onRefresh() {
         PAGENO = 0;
-        adapter.removeAll();
+        isRefresh = true;
         mPresenter.loadImage(PAGENO,PAGESIZE);
     }
 
@@ -159,17 +164,23 @@ public class ImagesFragment extends BaseFragment implements SwipeRefreshLayout.O
     }
 
     @Override
+    public void showNetWorkError() {
+        adapter.showNetWorkErrorView();
+    }
+
+    @Override
     public void showImages(List<Image> images) {
+        if(isRefresh)adapter.removeAll();
         swiprefresh.setRefreshing(false);
+//        adapter.dismissFooter();
         adapter.addData(images);
 
         if(images.size()<PAGESIZE){
-            adapter.loadComplete();
             adapter.showFooter();
+            adapter.loadComplete();
         }else{
             adapter.dismissFooter();
             adapter.openLoadMore(PAGESIZE);
-
         }
     }
 
@@ -188,6 +199,8 @@ public class ImagesFragment extends BaseFragment implements SwipeRefreshLayout.O
                         image.setDescription(file.getName());
                         image.setImage_url(file.getAbsolutePath());
 //                        adapter.addData(image);
+                        isRefresh = true;
+                        PAGENO = 0;
                         mPresenter.saveImage(image);
                     }
 

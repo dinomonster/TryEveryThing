@@ -33,6 +33,11 @@ public class RemoteDataSource implements DataSource {
         return null;
     }
 
+    @Override
+    public Observable<Iterable<Image>> saveImages(List<Image> images) {
+        return null;
+    }
+
     public static RemoteDataSource getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new RemoteDataSource();

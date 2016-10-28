@@ -1,5 +1,6 @@
 package com.dino.tryeverything.data.remote.network;
 
+import com.dino.tryeverything.constants.UrlConstants;
 import com.dino.tryeverything.data.remote.network.api.ImageApi;
 
 import okhttp3.OkHttpClient;
@@ -23,7 +24,7 @@ public class NetWork {
         if (imageApi == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("http://zhuangbi.info/")
+                    .baseUrl(UrlConstants.BASE)
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();

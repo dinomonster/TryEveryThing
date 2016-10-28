@@ -114,6 +114,7 @@ public class MainActivity extends BaseActivity
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navView.setNavigationItemSelectedListener(this);
+        navView.setItemIconTintList(null);//使图标显示原生颜色
 
         ImagesFragment imagesFragment =
                 (ImagesFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);

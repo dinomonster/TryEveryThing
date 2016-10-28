@@ -9,11 +9,14 @@ import com.dino.tryeverything.bean.Image;
 
 import java.util.List;
 
+import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+import rx.subjects.BehaviorSubject;
 import rx.subscriptions.CompositeSubscription;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -32,6 +35,7 @@ public class ImagesPresenter implements ImagesContract.Presenter{
 
     @NonNull
     private CompositeSubscription mSubscriptions;
+
 
 
     public ImagesPresenter(@NonNull ImagesContract.View view,
@@ -62,6 +66,13 @@ public class ImagesPresenter implements ImagesContract.Presenter{
     @Override
     public void loadImage(int pageno,int pagesize) {
         mSubscriptions.clear();
+        Observable.create(new Observable.OnSubscribe<List<Image>>() {
+            @Override
+            public void call(Subscriber<? super List<Image>> subscriber) {
+
+            }
+        });
+
         Subscription subscription = repository
                 .getImages(pageno,pagesize)
                 .subscribeOn(Schedulers.io())
@@ -75,11 +86,12 @@ public class ImagesPresenter implements ImagesContract.Presenter{
                     @Override
                     public void onError(Throwable e) {
                         Log.e("onError","onError:"+e.getMessage());
-
+                        view.showNetWorkError();
                     }
 
                     @Override
                     public void onNext(List<Image> images) {
+                        Log.e("images","images:"+images.size());
                         view.showImages(images);
                     }
                 });

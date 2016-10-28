@@ -21,4 +21,6 @@ public interface DataSource {
 
     Observable<Image> saveImage(Image image);
 
+    Observable<Iterable<Image>> saveImages(List<Image> images);
+
 }
