@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dino.tryeverything.R;
 
 import java.io.File;
@@ -49,6 +50,8 @@ public final class GlideUtils {
             Glide.with(imageView.getContext())
                     .load(url)
                     .placeholder(defultImageID)
+                    .error(defultImageID)
+                    .diskCacheStrategy( DiskCacheStrategy.SOURCE )
                     .crossFade()
                     .centerCrop()
                     .into(imageView);

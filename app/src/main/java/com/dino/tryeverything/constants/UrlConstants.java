@@ -5,7 +5,9 @@ package com.dino.tryeverything.constants;
  */
 
 public class UrlConstants {
-    public static final String API_KEY = "2518b001f2915f7801987f73afe2f408";
-    public static final String BASE = "http://apis.baidu.com/tngou/cook/list";
+
+    public static final String GANHUO_BASE = "http://www.gank.io/api/";
+
+    public static final String FOOD_LIST_CACHE = "foodlist.db";
 
 }

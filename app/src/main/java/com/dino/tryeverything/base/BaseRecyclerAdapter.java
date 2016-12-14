@@ -10,6 +10,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dino.tryeverything.AppConfig;
 import com.dino.tryeverything.R;
+import com.dino.tryeverything.widget.CustomLoadMoreView;
+import com.socks.library.KLog;
 
 import java.util.List;
 
@@ -37,17 +39,6 @@ public abstract class BaseRecyclerAdapter<T> extends BaseQuickAdapter<T, BaseVie
 
 
     private void setBaseView() {
-        //配置上拉加载更多时的过度页面,上拉时自动显示
-        setLoadingView(LayoutInflater
-                .from(context)
-                .inflate(R.layout.recycler_item_updata, null));
-
-        //配置上拉失败页面，显示时需调用 showLoadMoreFailedView()
-        //点击失败页面会自动再次调用上拉加载
-        setLoadMoreFailedView(LayoutInflater
-                .from(context)
-                .inflate(R.layout.recycler_item_loadmorefailed, null));
-
         netErrorView = LayoutInflater.from(AppConfig.getInstance())
                 .inflate(R.layout.recycler_item_neterror, (ViewGroup) recyclerView.getParent(), false);
 
@@ -55,34 +46,15 @@ public abstract class BaseRecyclerAdapter<T> extends BaseQuickAdapter<T, BaseVie
                 .inflate(R.layout.recycler_item_empty, (ViewGroup) recyclerView.getParent(), false);
 
         setEmptyView(notDataView);
+        setLoadMoreView(new CustomLoadMoreView());
+        setAutoLoadMoreSize(3);
     }
 
-    //显示底部
-    public void showFooter() {
-        addFooterView(getFooterView());
-    }
-
-    //取消底部显示
-    public void dismissFooter() {
-        removeAllFooterView();
-    }
-
-    private View getFooterView() {
-        return LayoutInflater
-                .from(context)
-                .inflate(R.layout.recycler_item_footer, null);
-    }
-
-    //TODO 清空列表
-    public void removeAll() {
-        this.mData.clear();
-        this.notifyDataSetChanged();
-        this.dismissFooter();
-    }
 
     //TODO 暂无数据
     public void showNoDataView() {
         if (isEmptyView(notDataView)) {
+            KLog.e("showNoDataView");
             setEmptyView(notDataView);
             notifyItemChanged(0);
         }
@@ -93,15 +65,6 @@ public abstract class BaseRecyclerAdapter<T> extends BaseQuickAdapter<T, BaseVie
         if (isEmptyView(netErrorView)) {
             setEmptyView(netErrorView);
             notifyItemChanged(0);
-        }
-    }
-
-    @Override
-    public void addData(List<T> newData) {
-        if (newData != null) {
-            this.mData.addAll(newData);
-            dataAdded();
-            notifyItemRangeInserted(this.mData.size(), newData.size());
         }
     }
 

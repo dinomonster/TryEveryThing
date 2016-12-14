@@ -3,8 +3,8 @@ package com.dino.tryeverything;
 import android.app.Application;
 import android.util.TypedValue;
 
-import com.dino.tryeverything.data.local.DaoManager;
 import com.dino.tryeverything.widget.UILImageLoader;
+import com.socks.library.KLog;
 
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
@@ -31,6 +31,9 @@ public class AppConfig extends Application {
         instance = this;
         //初始化图片选择
         initImageSelector();
+
+        //init Log
+        KLog.init(BuildConfig.LOG_DEBUG);
     }
 
     private void initImageSelector() {
