@@ -46,4 +46,24 @@
         <item name="android:backgroundDimEnabled">true</item><!--模糊-->
     </style>
 
+
+
+    <style name="normalText9Style">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/textcolor9</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="normalText3Style">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/textcolor3</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
 </resources>

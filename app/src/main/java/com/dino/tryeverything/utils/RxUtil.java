@@ -14,10 +14,11 @@ public class RxUtil {
     public static <T> ObservableTransformer<T, T> normalSchedulers() {
         return new ObservableTransformer<T, T>() {
             @Override
-            public Observable<T> apply(Observable<T> upstream) {
+            public ObservableSource<T> apply(Observable<T> upstream) {
                 return upstream.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
     }
+
 }

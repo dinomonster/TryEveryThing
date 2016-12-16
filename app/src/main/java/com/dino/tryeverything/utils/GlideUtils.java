@@ -1,10 +1,15 @@
 package com.dino.tryeverything.utils;
 
+import android.content.Context;
 import android.text.TextUtils;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.dino.tryeverything.R;
 
 import java.io.File;
@@ -53,10 +58,11 @@ public final class GlideUtils {
                     .error(defultImageID)
                     .diskCacheStrategy( DiskCacheStrategy.SOURCE )
                     .crossFade()
-                    .centerCrop()
                     .into(imageView);
         }
     }
+
+
 
 
 }

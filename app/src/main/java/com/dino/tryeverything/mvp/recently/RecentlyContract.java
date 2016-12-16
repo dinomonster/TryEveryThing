@@ -2,6 +2,7 @@ package com.dino.tryeverything.mvp.recently;
 
 import com.dino.tryeverything.base.BasePresenter;
 import com.dino.tryeverything.base.BaseView;
+import com.dino.tryeverything.bean.GanHuoRecentlyWrapper;
 import com.dino.tryeverything.bean.GanHuoTitleBean;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface RecentlyContract {
     /**
      * view接口层  处理界面
      */
-    interface View extends BaseView<Presenter>{
+    interface View<T> extends BaseView<Presenter>{
         /**
          * 错误显示
          */
@@ -23,7 +24,7 @@ public interface RecentlyContract {
         /**
          * 列表
          */
-        void showGanHuoRecently(List<GanHuoTitleBean> bean);
+        void showGanHuoRecently(T bean);
     }
 
     /**
@@ -33,6 +34,7 @@ public interface RecentlyContract {
 
 
         void getTitles();
+        void getRecentlyGanHuo(String date);
 
 
     }
