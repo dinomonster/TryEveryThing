@@ -10,6 +10,7 @@ import com.dino.tryeverything.base.BaseActivity;
  */
 
 public class SearchResultActivity extends BaseActivity {
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_search_result;

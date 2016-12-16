@@ -43,7 +43,7 @@ public abstract class BaseFragment extends Fragment implements BaseViewInterface
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);     //注解注册
-
+        dialogHelper = new DialogHelper(getActivity());
         setView(view);
 
 

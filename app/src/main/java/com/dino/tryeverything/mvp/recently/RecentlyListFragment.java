@@ -94,6 +94,7 @@ public class RecentlyListFragment extends BaseFragment implements RecentlyContra
 
     @Override
     public void initData() {
+        swiperefresh.setRefreshing(true);
         presenter.getRecentlyGanHuo(date);
     }
 

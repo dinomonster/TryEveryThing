@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="main_tab_arrays">
-        <item>最新</item>
-        <item>通知</item>
-        <item>通讯录</item>
-        <item>个人中心</item>
+        <item>最新干货</item>
+        <item>分类</item>
+        <item>face</item>
+        <item>face</item>
         <item>个人中心</item>
     </string-array>
 

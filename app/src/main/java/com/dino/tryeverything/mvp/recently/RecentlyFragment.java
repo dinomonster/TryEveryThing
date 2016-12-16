@@ -9,6 +9,7 @@ import com.dino.tryeverything.bean.GanHuoRecentlyWrapper;
 import com.dino.tryeverything.data.GanHuoRepository;
 import com.dino.tryeverything.data.local.LocalGanHuoDataSource;
 import com.dino.tryeverything.data.remote.RemoteGanHuoDataSource;
+import com.dino.tryeverything.widget.RotateDownPageTransformer;
 
 
 import butterknife.BindView;
@@ -36,6 +37,7 @@ public class RecentlyFragment extends BaseFragment implements RecentlyContract.V
     @Override
     public void initView() {
         presenter = new RecentlyPresenter(this, GanHuoRepository.getInstance(RemoteGanHuoDataSource.getInstance(), LocalGanHuoDataSource.getInstance()));
+        dialogHelper.showProgressDialog("数据加载中...");
         presenter.subscribe();
     }
 
@@ -58,13 +60,16 @@ public class RecentlyFragment extends BaseFragment implements RecentlyContract.V
 
     @Override
     public void showNetWorkError() {
+        dialogHelper.dismissProgressDialog();
     }
     @Override
     public void showGanHuoRecently(Object bean) {
+        dialogHelper.dismissProgressDialog();
         if(bean instanceof GanHuoRecentlyWrapper) {
             GanHuoRecentlyWrapper wrapper = (GanHuoRecentlyWrapper) bean;
             mPageAdapter = new GanHuoRecentlyPageAdapter(getChildFragmentManager(), wrapper.dateList, wrapper.titleList);
             mViewPager.setAdapter(mPageAdapter);
+            mViewPager.setPageTransformer(false,new RotateDownPageTransformer());
             for (int i = 0; i < wrapper.dateList.size(); i++) {
                 mTabLayout.addTab(mTabLayout.newTab());
             }

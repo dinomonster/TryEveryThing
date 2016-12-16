@@ -180,8 +180,8 @@ public class DialogHelper {
 
                 mAlertDialog.show();
 
-                mAlertDialog.setCanceledOnTouchOutside(true);
-//                mAlertDialog.setCanceledOnTouchOutside(false);
+//                mAlertDialog.setCanceledOnTouchOutside(true);
+                mAlertDialog.setCanceledOnTouchOutside(false);
             }
         });
     }
