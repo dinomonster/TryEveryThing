@@ -1,5 +1,6 @@
 package com.dino.tryeverything.mvp.recently;
 
+import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,6 +24,7 @@ import com.dino.tryeverything.bean.GanHuoRecentlyBean;
 import com.dino.tryeverything.data.GanHuoRepository;
 import com.dino.tryeverything.data.local.LocalGanHuoDataSource;
 import com.dino.tryeverything.data.remote.RemoteGanHuoDataSource;
+import com.dino.tryeverything.databinding.ItemRecentlyBinding;
 import com.dino.tryeverything.mvp.MainWebActivity;
 import com.dino.tryeverything.utils.GlideUtils;
 

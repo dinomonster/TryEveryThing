@@ -1,53 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tool:text="Android"
-        android:layout_marginBottom="@dimen/space_8"
-        android:layout_marginLeft="@dimen/space_8"
-        android:textSize="@dimen/text_size_20"
-        android:textColor="@color/black" />
+    <data>
+        <variable
+            name="bean"
+            type="com.dino.tryeverything.bean.GanHuoDataBean"/>
+        <variable
+            name="title"
+            type="String"/>
+        <import type="android.view.View"/>
+        <import type="com.dino.tryeverything.utils.MyDateUtils"/>
+        <import type="com.dino.tryeverything.utils.StringUtils"/>
+        <import type="com.dino.tryeverything.mvp.recently.RecentlyAdapter"/>
+    </data>
 
     <LinearLayout
-        android:id="@+id/content_ll"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tool="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/space_15"
-        android:layout_marginLeft="@dimen/space_20"
-        android:layout_marginRight="@dimen/space_8"
-        android:orientation="horizontal">
-        <TextView
-            style="@style/normalText3Style"
-            android:text="*"
-            android:layout_marginRight="@dimen/space_5"
-            />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textcolor9"
-            android:textSize="@dimen/text_size_15"
-            android:layout_marginRight="@dimen/space_5"
-            android:text="[2016]"/>
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/textcolor3"
-            android:textSize="@dimen/text_size_15"
-            android:text="2sssssssssssssssssssssssssssssss222"/>
+            android:layout_marginBottom="@dimen/space_8"
+            android:layout_marginLeft="@dimen/space_8"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20"
+            android:visibility="@{StringUtils.isEmpty(title)?View.GONE : View.VISIBLE}"
+            android:text="@{title}" />
+
+        <LinearLayout
+            android:id="@+id/content_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/space_15"
+            android:layout_marginLeft="@dimen/space_20"
+            android:layout_marginRight="@dimen/space_8"
+            android:visibility="@{StringUtils.isEmpty(title)?View.VISIBLE : View.GONE}"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/normalText3Style"
+                android:layout_marginRight="@dimen/space_5"
+                android:text="*" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/space_5"
+                android:text='@{"["+MyDateUtils.formatDate(bean.publishedAt)+"]"}'
+                android:textColor="@color/textcolor9"
+                android:textSize="@dimen/text_size_15" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{RecentlyAdapter.toSpannableString(bean.desc+"["+bean.who+"]")}'
+                android:textColor="@color/textcolor3"
+                android:textSize="@dimen/text_size_15" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-
-</LinearLayout>
+</layout>

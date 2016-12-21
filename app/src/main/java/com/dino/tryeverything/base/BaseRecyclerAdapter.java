@@ -1,6 +1,8 @@
 package com.dino.tryeverything.base;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +25,7 @@ import java.util.List;
  * 3、上拉加载数据失败时，底部会有一个错误提示，点击该提示会自动再次加载
  * 4、请求完所有数据可以显示一个通用底部页面(这个页面需要手动show，上面三个页面是自动显示的)
  */
-public abstract class BaseRecyclerAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
+public abstract class BaseRecyclerAdapter<T, K extends BaseViewHolder> extends BaseQuickAdapter<T, K> {
 
     private RecyclerView recyclerView;
     private Context context;
@@ -70,6 +72,18 @@ public abstract class BaseRecyclerAdapter<T> extends BaseQuickAdapter<T, BaseVie
 
     private boolean isEmptyView(View view) {
         return getEmptyView() != view;
+    }
+
+
+    @Override
+    protected View getItemView(int layoutResId, ViewGroup parent) {
+        ViewDataBinding binding = DataBindingUtil.inflate(mLayoutInflater, layoutResId, parent, false);
+        if (binding == null) {
+            return super.getItemView(layoutResId, parent);
+        }
+        View view = binding.getRoot();
+        view.setTag(R.id.BaseQuickAdapter_databinding_support, binding);
+        return view;
     }
 
 }

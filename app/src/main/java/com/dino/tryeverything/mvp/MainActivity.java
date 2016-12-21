@@ -2,10 +2,10 @@ package com.dino.tryeverything.mvp;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
@@ -14,26 +14,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.ashokvarma.bottomnavigation.BottomNavigationBar;
-import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.dino.tryeverything.R;
 import com.dino.tryeverything.base.BaseActivity;
-import com.dino.tryeverything.base.BaseCustomTabLayoutAdapter;
 import com.dino.tryeverything.base.BaseFragment;
 import com.dino.tryeverything.mvp.classify.ClassifyFragment;
 import com.dino.tryeverything.mvp.recently.RecentlyFragment;
 import com.dino.tryeverything.mvp.loading.LeafLoadingActivity;
 import com.dino.tryeverything.utils.ActivityUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationBar.OnTabSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -44,7 +39,7 @@ public class MainActivity extends BaseActivity
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @BindView(R.id.bottom_navigation_bar)
-    BottomNavigationBar bottomNavigationBar;
+    BottomNavigationView bottomNavigationBar;
 
     private Map<String, BaseFragment> tab_fragments;
     private String mTitles[];
@@ -127,19 +122,41 @@ public class MainActivity extends BaseActivity
 
 
         mTitles = getResources().getStringArray(R.array.main_tab_arrays);
+        toolbar.setTitle(mTitles[0]);
+
         tab_fragments = new HashMap<>();
 
         mCurrentFragment = createFragment(RecentlyFragment.class);
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),mCurrentFragment , R.id.main_content);
 
-        bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.drawable.ic_home, mTitles[0]))
-                .addItem(new BottomNavigationItem(R.drawable.ic_fenlei, mTitles[1]))
-                .addItem(new BottomNavigationItem(R.drawable.ic_face, mTitles[2]))
-                .addItem(new BottomNavigationItem(R.drawable.ic_image, mTitles[3]))
-                .addItem(new BottomNavigationItem(R.drawable.ic_me, mTitles[4]))
-                .initialise();
-        bottomNavigationBar.setTabSelectedListener(this);
+        bottomNavigationBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.bottom_home:
+                        setTopTitle(0);
+                        switchFragment(RecentlyFragment.class);
+                        break;
+                    case R.id.bottom_fenlei:
+                        setTopTitle(1);
+                        switchFragment(ClassifyFragment.class);
+                        break;
+                    case R.id.bottom_image:
+                        setTopTitle(2);
+                        switchFragment(ClassifyFragment.class);
+                        break;
+                    case R.id.bottom_face:
+                        setTopTitle(3);
+                        switchFragment(ClassifyFragment.class);
+                        break;
+                    case R.id.bottom_me:
+                        setTopTitle(4);
+                        switchFragment(ClassifyFragment.class);
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -181,43 +198,8 @@ public class MainActivity extends BaseActivity
     }
 
 
-    @Override
-    public void onTabSelected(int position) {
-        switch (position) {
-            case 0:
-                setTopTitle(0);
-                switchFragment(RecentlyFragment.class);
-                break;
-            case 1:
-                setTopTitle(1);
-                switchFragment(ClassifyFragment.class);
-                break;
-            case 2:
-                setTopTitle(2);
-                switchFragment(ClassifyFragment.class);
-                break;
-            case 3:
-                setTopTitle(3);
-                switchFragment(ClassifyFragment.class);
-                break;
-            case 4:
-                setTopTitle(4);
-                switchFragment(ClassifyFragment.class);
-                break;
-        }
-    }
-
     private void setTopTitle(int position) {
-//        setToolbarCentel(false, mTitles[position]);
+        toolbar.setTitle(mTitles[position]);
     }
 
-    @Override
-    public void onTabUnselected(int position) {
-
-    }
-
-    @Override
-    public void onTabReselected(int position) {
-
-    }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_home"
+        android:icon="@drawable/ic_home"
+        android:title="最新干货" />
+    <item
+        android:id="@+id/bottom_fenlei"
+        android:icon="@drawable/ic_fenlei"
+        android:title="分类" />
+    <item
+        android:id="@+id/bottom_face"
+        android:icon="@drawable/ic_face"
+        android:title="face" />
+   <item
+        android:id="@+id/bottom_image"
+        android:icon="@drawable/ic_image"
+        android:title="face" />
+
+    <item
+        android:id="@+id/bottom_me"
+        android:icon="@drawable/ic_me"
+        android:title="个人中心"/>
+</menu>

@@ -168,4 +168,6 @@
     <color name="swiperefresh_color4">#ffaa66cc</color>
 
     <color name="fragment_bg">#F1F1F1</color>
+
+    <color name="bottombarnormalColor">#7B8082</color>
 </resources>
